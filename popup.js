@@ -61,6 +61,8 @@ btnDelNewNote.addEventListener("click", () => {
   curNoteId = 0;
   curNote = null;
 
+  chrome.storage.local.set({ gxNote: JSON.stringify({ list: listNote }), }, () => {} );
+
   while (listNoteBox.firstChild) {
     listNoteBox.removeChild(listNoteBox.firstChild);
   }
@@ -72,8 +74,6 @@ btnDelNewNote.addEventListener("click", () => {
     newP.dataset.id = ind
     listNoteBox.appendChild(newP);
   });
-
-  console.log(listNote)
 });
 
 btnAddNewNote.addEventListener("click", () => {
