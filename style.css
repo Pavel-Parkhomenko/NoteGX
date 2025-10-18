@@ -1,0 +1,92 @@
+body {
+	background-color: #240d24;
+  color: white;
+  margin: 3px;
+  padding: 0;
+}
+
+.container {
+  padding: 10px;      
+  background-color: #131111c4;
+  font-family: monospace;
+  max-height: 300px;
+  height: 300px;
+	width: 300px;
+  position: inherit;
+	/* box-sizing: content-box; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url('./icons/bg.svg');
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position-y: 20%;
+  background-position-x: center;
+}
+
+/*300 - 10 - 70 - 10 - 10*/
+#listNoteBox {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto; 
+  margin-top: 10px; 
+  min-height: 190px;
+  /* background-color: #ad7272; */
+  max-height: 190px;
+}
+
+#listNoteBox p {
+  margin: 0;
+  min-height: 22px;
+  font-size: 18px;
+  border-bottom: 1px solid rgb(197, 185, 185, 0.5);
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+#listNoteBox p.selected {
+  color: rgb(124, 209, 142);
+  border-bottom: 1px solid rgb(124, 209, 142);
+}
+
+textarea {
+  /* border-top: 10px solid #1a1a1a; */
+  font-size: 16px;
+  height: 70px; 
+  background-color: #2a2a2a;
+  color: #fff;
+  resize: none;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.btn_panel {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.btn_panel button {
+  background-color: inherit;
+  /* border: none; */
+  margin: 0;
+  padding: 3px 3px;
+  border-radius: 3px
+}
+
+.btn_panel img {
+  /* font-size: 14px; */
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+}
+
+.bot_box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

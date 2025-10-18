@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Note GX",
+  "version": "1.0",
+  "description": "Notepade for Opera GX",
+  "permissions": [ "storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icons/icon.svg"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}
