@@ -56,21 +56,22 @@ noteTextArea.addEventListener("input", (event) => {
 });
 
 btnDelNewNote.addEventListener("click", () => {
-  if(listNote.length === 0) return
+  if(listNote.length === 0 || curNoteId === -1) return
   listNote.splice(curNoteId, 1);
-  curNoteId = 0;
+  curNoteId = -1;
   curNote = null;
 
-  chrome.storage.local.set({ gxNote: JSON.stringify({ list: listNote }), }, () => {} );
+  // chrome.storage.local.set({ gxNote: JSON.stringify({ list: listNote }), }, () => {} );
 
   while (listNoteBox.firstChild) {
     listNoteBox.removeChild(listNoteBox.firstChild);
   }
 
+  noteTextArea.value = ""
+
   listNote.map((note, ind) => {
     const newP = document.createElement("p");
     newP.textContent = truncateText(note.text);
-    // newP.classList.add(`note_${ind}`);
     newP.dataset.id = ind
     listNoteBox.appendChild(newP);
   });
@@ -81,14 +82,18 @@ btnAddNewNote.addEventListener("click", () => {
     noteTextArea.value = "Too many notes!!!";
     return
   }
+
   noteTextArea.value = "";
-  listNote.push({
-    text: "",
-  });
+  listNote.push({ text: "" });
 
   const newP = document.createElement("p");
   newP.textContent = "";
   newP.dataset.id = listNote.length - 1
+  curNoteId = listNote.length - 1
   listNoteBox.appendChild(newP)
   curNote = newP
+  noteTextArea.focus()
+
+  listNoteBox.querySelectorAll("p").forEach(p => p.classList.remove("selected"))
+  newP.classList.add("selected");
 });
