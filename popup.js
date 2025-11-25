@@ -5,12 +5,15 @@ const btnDelNewNote = document.getElementById("btnDelNewNote");
 
 let listNote = [];
 let curNote = null;
-let curNoteId = 0;
+let curNoteId = -1;
 
 document.addEventListener("DOMContentLoaded", () => {
   chrome.runtime.sendMessage({ type: "popup_opened" }, (response) => {
     if (response.st === 200) {
       listNote = JSON.parse(response.data.gxNote).list || [];
+
+      curNote = null
+      curNoteId = -1
 
       listNote.map((note, ind) => {
         const newP = document.createElement("p");
@@ -43,7 +46,7 @@ listNoteBox.addEventListener("click", (event) => {
 });
 
 noteTextArea.addEventListener("input", (event) => {
-  if (curNote === null) return;
+  if (curNote === null || curNoteId === -1) return;
 
   curNote.textContent = truncateText(event.target.value);
   listNote[curNoteId].text = event.target.value;
@@ -61,7 +64,7 @@ btnDelNewNote.addEventListener("click", () => {
   curNoteId = -1;
   curNote = null;
 
-  // chrome.storage.local.set({ gxNote: JSON.stringify({ list: listNote }), }, () => {} );
+  chrome.storage.local.set({ gxNote: JSON.stringify({ list: listNote }), }, () => {} );
 
   while (listNoteBox.firstChild) {
     listNoteBox.removeChild(listNoteBox.firstChild);
